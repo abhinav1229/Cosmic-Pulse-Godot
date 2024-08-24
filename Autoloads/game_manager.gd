@@ -1,6 +1,7 @@
 extends Node
 
 # Global variables
+var mainNode:Node2D = null
 var score: int = 0
 var player_health: int = 100
 var game_state: String = "menu"  # Possible states: "menu", "playing", "paused", "game_over"
@@ -11,6 +12,9 @@ const GAME_OVER_HEALTH_THRESHOLD = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# get the main node 
+	mainNode = get_tree().get_first_node_in_group("mainNode")
+	
 	# Initialize the game state when the game starts
 	reset_game()
 
