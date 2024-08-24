@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://danqcoyrw5uqo"]
+
+[ext_resource type="Texture2D" uid="uid://dmymci8plw13p" path="res://Sprites/Background/Blue Nebula/Blue_Nebula_01-512x512.png" id="1_p24jk"]
+[ext_resource type="Script" path="res://Scenes/PlayerController.gd" id="3_ego2s"]
+[ext_resource type="Texture2D" uid="uid://bciegxhy30fl1" path="res://Sprites/Ship/Main Ship - Base - Damaged.png" id="3_qt0uy"]
+[ext_resource type="Script" path="res://Scenes/ObjectsSpawner.gd" id="4_ma3nc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sk57u"]
+size = Vector2(30.4, 28.4)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_53giv"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+
+[node name="main" type="Node2D"]
+
+[node name="Background" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Background"]
+motion_mirroring = Vector2(0, 479.744)
+
+[node name="BackgroundSprite" type="Sprite2D" parent="Background/ParallaxLayer"]
+position = Vector2(195, 241)
+scale = Vector2(1.3, 1.218)
+texture = ExtResource("1_p24jk")
+
+[node name="Player" type="Node2D" parent="."]
+position = Vector2(174, 585)
+
+[node name="Spaceship" type="Sprite2D" parent="Player"]
+texture_filter = 1
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("3_qt0uy")
+
+[node name="Area2D" type="Area2D" parent="Player/Spaceship"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Spaceship/Area2D"]
+position = Vector2(-1.85966e-06, -0.199998)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_sk57u")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Player"]
+process_material = SubResource("ParticleProcessMaterial_53giv")
+
+[node name="Controllers" type="Node" parent="."]
+
+[node name="PlayerController" type="Node" parent="Controllers"]
+script = ExtResource("3_ego2s")
+
+[node name="ObjectsSpawner" type="Node" parent="Controllers"]
+script = ExtResource("4_ma3nc")
