@@ -1,6 +1,7 @@
 extends Node2D
 
 var speed = 200  # Speed of the node
+var rotation_speed = 0.05  # Rotation speed factor
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,7 +14,6 @@ func _process(delta):
 	# Arrow keys
 	if Input.is_action_pressed("ui_up"):
 		direction.y -= 1
-		rotate(0.2)
 	if Input.is_action_pressed("ui_down"):
 		direction.y += 1
 	if Input.is_action_pressed("ui_left"):
@@ -34,6 +34,9 @@ func _process(delta):
 	# Normalize the direction to avoid faster diagonal movement
 	if direction != Vector2.ZERO:
 		direction = direction.normalized()
+
+		# Apply rotation based on the movement direction
+		rotation = direction.angle() * rotation_speed
 
 	# Update the position
 	position += direction * speed * delta

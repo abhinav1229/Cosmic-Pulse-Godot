@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://db8y5tdl5a472"]
 
-[ext_resource type="Script" path="res://Scenes/player.gd" id="1_uax5s"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_c5usr"]
 [ext_resource type="Texture2D" uid="uid://bciegxhy30fl1" path="res://Sprites/Ship/Main Ship - Base - Damaged.png" id="1_xmsts"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sk57u"]
@@ -14,7 +14,7 @@ orbit_velocity_max = 0.0
 
 [node name="Player" type="Node2D"]
 position = Vector2(174, 585)
-script = ExtResource("1_uax5s")
+script = ExtResource("1_c5usr")
 
 [node name="Spaceship" type="Sprite2D" parent="."]
 texture_filter = 1
