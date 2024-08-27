@@ -1,19 +1,48 @@
-[gd_scene load_steps=5 format=3 uid="uid://db8y5tdl5a472"]
+[gd_scene load_steps=11 format=3 uid="uid://db8y5tdl5a472"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_c5usr"]
 [ext_resource type="Texture2D" uid="uid://bciegxhy30fl1" path="res://Sprites/Ship/Main Ship - Base - Damaged.png" id="1_xmsts"]
+[ext_resource type="Texture2D" uid="uid://bgmrbpaswfrtg" path="res://Sprites/AnimationSprites/flameparticle.png" id="3_jetr8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sk57u"]
 size = Vector2(30.4, 28.4)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_28ceb"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 8
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_bhdcy"]
+offsets = PackedFloat32Array(0, 0.465347, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.997747, 0.173411, 0.428703, 1, 0, 0, 0, 0.662745)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gd6g0"]
+gradient = SubResource("Gradient_bhdcy")
+
+[sub_resource type="Curve" id="Curve_1gbe8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.995935, 0.829182), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_p4l4f"]
+curve = SubResource("Curve_1gbe8")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_53giv"]
 particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
 gravity = Vector3(0, 98, 0)
+initial_velocity_max = 50.0
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
+damping_min = 100.0
+damping_max = 100.0
+scale_min = 0.15
+scale_max = 0.15
+scale_curve = SubResource("CurveTexture_p4l4f")
+color_ramp = SubResource("GradientTexture1D_gd6g0")
 
 [node name="Player" type="Node2D"]
-position = Vector2(174, 585)
+position = Vector2(174, 320)
 script = ExtResource("1_c5usr")
 
 [node name="Spaceship" type="Sprite2D" parent="."]
@@ -28,4 +57,12 @@ position = Vector2(-1.85966e-06, -0.199998)
 shape = SubResource("RectangleShape2D_sk57u")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_28ceb")
+position = Vector2(0, 35)
+amount = 50
 process_material = SubResource("ParticleProcessMaterial_53giv")
+texture = ExtResource("3_jetr8")
+trail_lifetime = 0.1
+trail_section_subdivisions = 16
+
+[node name="Camera2D" type="Camera2D" parent="."]

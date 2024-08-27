@@ -1,46 +1,48 @@
-[gd_scene load_steps=7 format=3 uid="uid://ccvn5g57k3kp3"]
+[gd_scene load_steps=8 format=3 uid="uid://ccvn5g57k3kp3"]
 
 [ext_resource type="Texture2D" uid="uid://b4xd5hhsydgsr" path="res://Sprites/AnimationSprites/sparkle.png" id="1_ok2rk"]
+[ext_resource type="Script" path="res://Scripts/star_animation.gd" id="2_dqips"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_agqm0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_de8p0"]
 atlas = ExtResource("1_ok2rk")
-region = Rect2(0, 0, 32, 32)
+region = Rect2(128, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_exyqf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ucp5"]
 atlas = ExtResource("1_ok2rk")
-region = Rect2(32, 0, 32, 32)
+region = Rect2(160, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i6ulo"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_q1ksy"]
 atlas = ExtResource("1_ok2rk")
-region = Rect2(64, 0, 32, 32)
+region = Rect2(192, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_r4tka"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_gqtid"]
 atlas = ExtResource("1_ok2rk")
-region = Rect2(96, 0, 32, 32)
+region = Rect2(224, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ff5t7"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_agqm0")
+"texture": SubResource("AtlasTexture_de8p0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_exyqf")
+"texture": SubResource("AtlasTexture_8ucp5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i6ulo")
+"texture": SubResource("AtlasTexture_q1ksy")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_r4tka")
+"texture": SubResource("AtlasTexture_gqtid")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 3.0
 }]
 
 [node name="StarAnimation" type="AnimatedSprite2D"]
-modulate = Color(0.8, 1, 0.945098, 1)
+modulate = Color(1, 1, 1, 0.27451)
 texture_filter = 1
 position = Vector2(207, 262)
 sprite_frames = SubResource("SpriteFrames_ff5t7")
-frame_progress = 0.459504
+frame_progress = 0.547339
+script = ExtResource("2_dqips")

@@ -4,78 +4,32 @@ extends Node
 var mainNode:Node2D = null
 var score: int = 0
 var player_health: int = 100
-var game_state: String = "menu"  # Possible states: "menu", "playing", "paused", "game_over"
+var game_state: String = "menu"  
 
 # Constants for easy reference
 const MAX_HEALTH = 100
 const GAME_OVER_HEALTH_THRESHOLD = 0
 
-# Called when the node enters the scene tree for the first time.
+const star_animation_colors = [Color.INDIAN_RED, Color.AQUAMARINE, Color.YELLOW, Color.WHITE, Color.CORNFLOWER_BLUE, Color.DARK_MAGENTA]
+
 func _ready():
-	# get the main node 
 	mainNode = get_tree().get_first_node_in_group("mainNode")
 	
-	# Initialize the game state when the game starts
-	reset_game()
+func get_star_color() -> Color:
+	var rand = randi_range(0, star_animation_colors.size() - 1)
+	var color = star_animation_colors[rand]
+	var alpha_for_stars = randf_range(0.25, 0.65)
+	return Color(color.r, color.g, color.b, alpha_for_stars)
+	
+func spawn_scene(scene_name: String, parent = null):
+	var scene_path = "res://Scenes/" + scene_name + ".tscn"
+	var scene = load(scene_path).instantiate()
+	if scene != null:
+		if parent != null:
+			parent.add_child(scene)
+		return scene
+	else:
+		print("Failed to load the scene: ", scene_name)
+		
+	return null
 
-# Function to start the game
-func start_game():
-	score = 0
-	player_health = MAX_HEALTH
-	game_state = "playing"
-	print("Game started")
-	# Notify other scenes or nodes that the game has started (optional)
-	# emit_signal("game_started")
-
-# Function to pause the game
-func pause_game():
-	if game_state == "playing":
-		game_state = "paused"
-		print("Game paused")
-		# Optionally pause all other processes or animations
-
-# Function to resume the game
-func resume_game():
-	if game_state == "paused":
-		game_state = "playing"
-		print("Game resumed")
-		# Optionally resume all other processes or animations
-
-# Function to end the game
-func end_game():
-	game_state = "game_over"
-	print("Game over")
-	# Notify other scenes or nodes that the game has ended (optional)
-	# emit_signal("game_over")
-
-# Function to increase the player's score
-func increase_score(amount: int):
-	score += amount
-	print("Score increased by %d. Total score: %d" % [amount, score])
-
-# Function to decrease the player's health
-func decrease_health(amount: int):
-	player_health -= amount
-	if player_health <= GAME_OVER_HEALTH_THRESHOLD:
-		player_health = 0
-		end_game()
-	print("Health decreased by %d. Remaining health: %d" % [amount, player_health])
-
-# Function to reset the game state
-func reset_game():
-	score = 0
-	player_health = MAX_HEALTH
-	game_state = "menu"
-	print("Game reset to initial state")
-
-# Function to get the current score
-func get_score() -> int:
-	return score
-
-# Function to get the player's current health
-func get_player_health() -> int:
-	return player_health
-
-# Function to get the current game state
-func get_game_state() -> String:
-	return game_state

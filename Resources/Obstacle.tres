@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Obstacle" load_steps=2 format=3 uid="uid://blv0t8st7rgng"]
+
+[ext_resource type="Script" path="res://Scripts/obstacle.gd" id="1_nxadd"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_nxadd")
+health = 0
+speed = 0.0
+name = ""

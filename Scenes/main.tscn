@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://danqcoyrw5uqo"]
+[gd_scene load_steps=6 format=3 uid="uid://danqcoyrw5uqo"]
 
 [ext_resource type="Texture2D" uid="uid://dmymci8plw13p" path="res://Sprites/Background/Blue Nebula/Blue_Nebula_01-512x512.png" id="1_p24jk"]
 [ext_resource type="Script" path="res://Scripts/GamePlayBackgroundController.gd" id="2_ad4dc"]
+[ext_resource type="PackedScene" uid="uid://d2iq44efcs07l" path="res://Scenes/bg_main.tscn" id="3_800ir"]
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="3_kb1xu"]
 [ext_resource type="Script" path="res://Scripts/ObjectsSpawner.gd" id="4_heipd"]
 
@@ -20,6 +21,10 @@ texture = ExtResource("1_p24jk")
 
 [node name="GamePlayBackground" type="Node2D" parent="."]
 script = ExtResource("2_ad4dc")
+
+[node name="Node2D" parent="GamePlayBackground" instance=ExtResource("3_800ir")]
+
+[node name="ObstaclesContainer" type="Node2D" parent="."]
 
 [node name="Controllers" type="Node" parent="."]
 

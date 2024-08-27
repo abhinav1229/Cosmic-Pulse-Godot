@@ -1,7 +1,13 @@
 extends Node2D
+@onready var spaceship = $Spaceship
 
 var speed = 200  # Speed of the node
 var rotation_speed = 0.05  # Rotation speed factor
+var extreme_point = 150.0
+const TOLERANCE = 1.0 # Define a small tolerance va
+
+signal reach_at_extreme()
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,6 +16,23 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var direction = Vector2.ZERO
+	
+	if position.y > 490 and Input.is_action_pressed("ui_down"):
+		return
+		
+	if Input.is_action_pressed("ui_left") and position.x < 40:
+#		spaceship.position.x -= speed * delta
+		return
+		
+	if Input.is_action_pressed("ui_right") and position.x > 325:
+#		spaceship.position.x += speed * delta
+		return
+	
+#	print(int(position.y), " | ", int(extreme_point))
+	if position.y < extreme_point:
+		extreme_point -= 300
+		print("Reached to extreme point: ", extreme_point)
+		SignalsManager.BackgroundSpawn()
 
 	# Arrow keys
 	if Input.is_action_pressed("ui_up"):
@@ -30,13 +53,12 @@ func _process(delta):
 		direction.x -= 1
 	if Input.is_action_pressed("move_right"):
 		direction.x += 1
+		
+#	print(position)
 
 	# Normalize the direction to avoid faster diagonal movement
 	if direction != Vector2.ZERO:
 		direction = direction.normalized()
-
-		# Apply rotation based on the movement direction
-		rotation = direction.angle() * rotation_speed
-
+		
 	# Update the position
 	position += direction * speed * delta
